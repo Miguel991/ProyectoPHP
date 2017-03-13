@@ -13,6 +13,13 @@
 				$this->con = new Conexion();
 			}
 
+			public function set($atributo, $contenido){
+				this->$atributo = $contenido;
+			}
+			public function get($atributo){
+				return $this->$atributo;
+			}
+
 			public function listar(){
 				$sql = "SELECT t1.*, t2.nombre as nombre_seccion FROM estudiante t1 INNER JOIN secciones t2 ON t1.id_seccion = t2.id;
 				$datos = $this->con->consultaRetorno($sql)";
@@ -40,9 +47,10 @@
 			public function view(){
 
 				$sql ="SELECT t1.*,t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 
-				ON t1.id_seccion = t2.id WHERE id = '{$this->id}'";
+				ON t1.id_seccion = t2.id WHERE t1.id = '{$this->id}'";
 				$datos = $this->con->consultaRetorno($sql);
-				return $datos;
+				$row =  mysqli_fetch_assoc($sql);
+				return $row;
 			}
 		}
 
