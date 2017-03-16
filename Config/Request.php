@@ -22,6 +22,9 @@
 					$this->metodo = strtolower(array_shift($ruta));
 					if(!this->metodo){
 						$this->metodo = "index";
+					}else{
+						$this->controlador = "estudiantes";
+						$this->metodo = "index";
 					}
 					
 					$this->argumento = $ruta;
